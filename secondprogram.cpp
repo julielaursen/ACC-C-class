@@ -14,6 +14,7 @@ int main()
 { 
     int x = 0; //initialize integer x and set to 5
     int y = 0; //initialize integer y and set to 15
+
     
     
     cout << "Enter the first integer:  ";
@@ -21,12 +22,15 @@ int main()
     cout << "Enter the second integer:  ";
     cin >> y;
     
-    int sum = x + y; //calculate the sum of x and y and set it to variable of sum\
+    int sum = x + y; //calculate the sum of x and y and set it to variable of sum
+    int difference = x - y;
 
-//  Print 
+	//  Print sum
     cout << sum << endl; 
+    //print difference
+    cout << difference << endl;
 
-    return 100;
+    return 0;
 	           
 
 }                               // end of main function
