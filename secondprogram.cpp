@@ -26,9 +26,9 @@ int main()
     int difference = x - y;
 
 	//  Print sum
-    cout << sum << endl; 
+    cout << "The sum is:  " << sum << endl; 
     //print difference
-    cout << difference << endl;
+    cout << "The difference is:  " << difference << endl;
 
     return 0;
 	           
