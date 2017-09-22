@@ -22,7 +22,7 @@ int main()
 		cout << "x is divisible by 5" << endl; 
 	}
 	
-	cout << "x is not divisble by 5" << endl;
+	cout << "Great job" << endl;
     return 0; 
 }                               // end of main function
 
