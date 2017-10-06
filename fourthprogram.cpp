@@ -16,11 +16,13 @@ int main(){
     int num = 25;
     int alibaba = xyz(num);
     cout << alibaba << endl;
+    cout << num << endl;
 }                               // end of main function
 
 int xyz(int &numb){
-	int x1 = numb;
-	numb = num * 99;
-	return x1 * 2;
+	int a;
+	a = numb;
+	numb = 99;
+	return a *2;
 }
 
