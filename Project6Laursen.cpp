@@ -123,7 +123,7 @@ float payrollReport(Payroll employee[], Timecard paystub[])
 	for (int i = 0; i < 4; i++ )
 	{
 		cout << left <<setw(4) <<employee[i].empId<<setw(27)
-		<<employee[i].empName  <<right << setw(9) <<paystub[i].grossPay << paystub[i].tax << paystub[i].netPay;
+		<<employee[i].empName  <<right << setw(9) <<paystub[i].grossPay << setw(9) << paystub[i].tax << setw(9) << paystub[i].netPay << endl;
 		totalGross += paystub[i].grossPay;
 		totalNet += paystub[i].netPay;
 	}

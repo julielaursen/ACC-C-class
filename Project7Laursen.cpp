@@ -15,6 +15,7 @@ struct Student
 
 void inputStudent(Student*, int&);
 double avgScore(Student*, int);
+void sortArray(Student* , int);
 void outputTable(Student*, int, double);
 int getScore(string prompt, int max, int min);
 
@@ -32,7 +33,7 @@ int main()
 	arrayOfStudents = new Student[numStudents];
 	
 	inputStudent(arrayOfStudents, numStudents);
-	//sortArray(arrayOfStudents, numStudents);
+    sortArray(arrayOfStudents, numStudents);
 	average = avgScore(arrayOfStudents, numStudents);
 	outputTable(arrayOfStudents, numStudents, average);
 	
@@ -67,9 +68,26 @@ void inputStudent(Student* arrayOfStudents, int& numStudents)
 		arrayOfStudents[i].test3 = getScore("Enter the student's test 3 score: ", 105,0);
 	}
 }
-// function to sort on score order
-//void sortArray(Student* arrayOfStudents, int numStudents)
-	//sorting algorithm
+
+void sortArray(Student* arrayOfStudents, int numStudents)
+{
+        Student Temp;   //holds a student struct object
+        bool swap;      //swap is initialized to false at the start of each loop. If it is still false at end of loop we know there is nothing else to sort
+        do
+        {
+            swap = false;
+            for (int i = 0; i < numStudents-1; i++)
+            {
+                if (arrayOfStudents[i].test1 > arrayOfStudents[i + 1].test1)
+                {
+                    Temp = arrayOfStudents[i];
+                    arrayOfStudents[i] = arrayOfStudents[i + 1];
+                    arrayOfStudents[i + 1] = Temp;
+                    swap = true;
+                }
+            }
+        } while (swap);
+}
 
 //function that calculates average scores
 double avgScore(Student* arrayOfStudents, int numStudents)
@@ -80,9 +98,12 @@ double avgScore(Student* arrayOfStudents, int numStudents)
 	
 	for(int i=0; i < numStudents; i++)
 	{
-		sum = (arrayOfStudents + i)->test1;
+		//sum = (arrayOfStudents + i)->test1;
+		sum = arrayOfStudents[i].test1 + arrayOfStudents[i].test2 + arrayOfStudents[i].test3;
+		cout << "Sum : " << sum << endl;
+		average = sum / 3;
 	}
-	average = sum / numStudents;
+	cout << "Average :" << average << endl;
 	return average;
 }
 
