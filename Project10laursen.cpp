@@ -1,6 +1,5 @@
  using namespace std;
 #include <string>
-
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -162,22 +161,26 @@ int popEmployees(ifstream& employeeFile, Employee emp[], int size)
 	int dependents;
 	int employeeType;
 	int counter=0;
+	string name;
 	//gets variables from employeeFile doc
-	employeeFile >> empId;
-	for (int i = 0; i < size; i++ )  
-	{
-		
-		employeeFile >> empName;
+
+		for(int i=0; i < size; i++)
+		{
+		employeeFile >> empId;
+		employeeFile.ignore();
+		getline(employeeFile, name, '#');
+		employeeFile.clear();
 		employeeFile >> payRate;
 		employeeFile >> dependents;
 		employeeFile >> employeeType;
-		
+			
 		//passes empId, empName, payRate, dependents, employeeType from the file to set function
 		emp[i].set(empId, empName, payRate, dependents, employeeType);
 		
 		//employeeFile >> empId;
 		counter++;
-	}
+		}
+	
 	return counter;
 }
 
@@ -198,7 +201,7 @@ void popTimeCard(ifstream& transFile, TimeCard tc [], int size)
 int main()
 {
 	ifstream employeeFile;
-	int size = 20;
+	int size = 6;
 	Employee emp[size];
 	TimeCard tc[size];
 	ifstream transFile;
@@ -226,6 +229,9 @@ int main()
 		popTimeCard(transFile, tc, size);
 	}
 	payrollReport(emp, tc, recNum);
+	
+	employeeFile.close();
+	transFile.close();
 	
 	return 0;
 
