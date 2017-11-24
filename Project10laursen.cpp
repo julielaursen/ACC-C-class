@@ -127,6 +127,24 @@ float calcPay(Employee emp, TimeCard tc[], int size)
 	return grossPay;
 }
 
+string getAcceptance(Employee emp[], TimeCard tc[], int size)
+{
+	for (int i = 0; i < size; i++ )
+		{
+		int id = emp[i].getID();
+		float hours = tc[i].getHours();
+		
+		if(id = 0)
+		{
+			cout << "Employee ID of 0 was entered for employee #" << id << ". This employee's information will not be printed" << endl;
+		}
+		else if (hours <= 0.0)
+		{
+			cout << "Employee hours of " << tc[i].getHours() << " was entered for employee #" << emp[i].getID() << ". This employee's information will not be printed" << endl;
+		}
+	}
+}
+
 float payrollReport(Employee emp[], TimeCard tc[], int size)					/// finish struct -> class translation
 {
 	cout << left <<setw(4) <<"ID"<<setw(27)<<"Name" <<right << setw(9) << "Gross Pay" << setw(9)  << "Tax" << setw(12) << "Insurance" << setw(9) << "Net Pay" << endl;
@@ -134,10 +152,13 @@ float payrollReport(Employee emp[], TimeCard tc[], int size)					/// finish stru
 	float totalGross = 0;
 	float totalNet = 0;
 	
+	int transactionNumber;
+	
 	bool flag = true;
 	
 	for (int i = 0; i < size; i++ )
 		{
+		string name = emp[i].getName();
 		int id = emp[i].getID();
 		int hours = tc[i].getHours();
 		if(id = 0)
@@ -155,17 +176,19 @@ float payrollReport(Employee emp[], TimeCard tc[], int size)					/// finish stru
 			int insurance = 30;
 			float netPay = grossPay - tax - insurance;
 			cout << left <<setw(4) <<emp[i].getID()<<setw(27)
-			<< emp[i].getName()  <<right << setw(9) <<grossPay << setw(9) << tax << setw(12) << insurance << setw(9)<< netPay << endl;
+			<< name  <<right << setw(9) <<grossPay << setw(9) << tax << setw(12) << insurance << setw(9)<< netPay << endl;
 			totalGross += grossPay;
 			totalNet += netPay;
+			transactionNumber++;
 		}
 	}
 	cout << endl;
 	cout << "Total Gross Pay: $" <<totalGross<< endl;
 	cout << "Total Net Pay: $" <<totalNet<< endl;
+	cout << "Total Number of Transactions: " << transactionNumber << endl;
+	getAcceptance(emp, tc, size);
 
 }
-
 
 int popEmployees(ifstream& employeeFile, Employee emp[], int size)
 {
@@ -176,22 +199,21 @@ int popEmployees(ifstream& employeeFile, Employee emp[], int size)
 	int dependents;
 	int employeeType;
 	int counter=0;
-	string name;
 	//gets variables from employeeFile doc
 
 		for(int i=0; i < size; i++)
 		{
+		string name;
+
 		employeeFile >> empId;
-		employeeFile.ignore();
-		getline(employeeFile, name, '#');
-		employeeFile.clear();
+		std::getline(employeeFile, name, '#');
 		employeeFile >> payRate;
 		employeeFile >> dependents;
 		employeeFile >> employeeType;
 			
 		//passes empId, empName, payRate, dependents, employeeType from the file to set function
 		emp[i].set(empId, empName, payRate, dependents, employeeType);
-		
+		cout << "Name : " << empName << endl; 
 		//employeeFile >> empId;
 		counter++;
 		}
