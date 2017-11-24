@@ -134,16 +134,31 @@ float payrollReport(Employee emp[], TimeCard tc[], int size)					/// finish stru
 	float totalGross = 0;
 	float totalNet = 0;
 	
+	bool flag = true;
+	
 	for (int i = 0; i < size; i++ )
-	{
-		float grossPay = calcPay(emp[i], tc, size);
-		float tax = .15 * grossPay;
-		int insurance = 30;
-		float netPay = grossPay - tax - insurance;
-		cout << left <<setw(4) <<emp[i].getID()<<setw(27)
-		<<emp[i].getName()  <<right << setw(9) <<grossPay << setw(9) << tax << setw(12) << insurance << setw(9)<< netPay << endl;
-		totalGross += grossPay;
-		totalNet += netPay;
+		{
+		int id = emp[i].getID();
+		int hours = tc[i].getHours();
+		if(id = 0)
+		{
+			flag = false;
+		}
+		else if (hours <= 0.0)
+		{
+			flag = false;
+		}
+		else if(flag = true)
+		{
+			float grossPay = calcPay(emp[i], tc, size);
+			float tax = .15 * grossPay;
+			int insurance = 30;
+			float netPay = grossPay - tax - insurance;
+			cout << left <<setw(4) <<emp[i].getID()<<setw(27)
+			<< emp[i].getName()  <<right << setw(9) <<grossPay << setw(9) << tax << setw(12) << insurance << setw(9)<< netPay << endl;
+			totalGross += grossPay;
+			totalNet += netPay;
+		}
 	}
 	cout << endl;
 	cout << "Total Gross Pay: $" <<totalGross<< endl;
